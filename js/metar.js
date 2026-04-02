@@ -7,6 +7,7 @@ import { fetchJSON, updateStatusPanel } from "./helpers.js";
 import { getRunwayFromWind } from "./runways.js";
 import { updateHeatmap } from "./sonometers.js";
 import { drawRunway, drawCorridor } from "./runways.js";
+import { RUNWAYS, computeCrosswind, updateRunwayPanel } from "./runways.js";
 
 /**
  * Charge le METAR depuis le proxy.
@@ -37,6 +38,9 @@ export function updateMetarUI(data) {
     const windSpeed = data.wind_speed?.value;
 
     const runway = getRunwayFromWind(windDir);
+    const { crosswind } = computeCrosswind(windDir, windSpeed, RUNWAYS[runway]?.heading);
+    updateRunwayPanel(runway, windDir, windSpeed, crosswind);
+
 
     // 1) Dessin piste + corridor
     drawRunway(runway, window.runwayLayer);
