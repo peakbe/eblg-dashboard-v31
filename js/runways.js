@@ -122,6 +122,7 @@ export function drawCorridor(runway, layer) {
                 repeat: "50%",
                 symbol: L.Symbol.arrowHead({
                     pixelSize: 12,
+                    
                     polygon: false,
                     pathOptions: { stroke: true, color: "orange" }
                 })
